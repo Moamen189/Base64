@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Upload Photo";
+}
+
+<h2>Upload Photo</h2>
+
+<div class="card">
+    <div class="card-body">
+        @using (Html.BeginForm("ConvertToBase64", "Photo", FormMethod.Post, new { enctype = "multipart/form-data", id = "uploadForm" }))
+        {
+            <div class="form-group">
+                <label for="file">Choose Photo:</label>
+                <input type="file" class="form-control-file" name="file" id="file" accept="image/*" onchange="previewImage()" required />
+                <small class="form-text text-muted">Accepted formats: JPEG, PNG, GIF</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        }
+
+        <div id="imagePreview" class="mt-3" style="display: none;">
+            <h4>Preview:</h4>
+            <img id="preview" class="img-fluid rounded" />
+        </div>
+
+        <div id="result" class="mt-3">
+            @Html.Partial("_Base64Result")
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function previewImage() {
+            var fileInput = document.getElementById('file');
+            var preview = document.getElementById('preview');
+            var imagePreview = document.getElementById('imagePreview');
+
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                }
+
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                preview.src = '';
+                imagePreview.style.display = 'none';
+            }
+        }
+    </script>
+}

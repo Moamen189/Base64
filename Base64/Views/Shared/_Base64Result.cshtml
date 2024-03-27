@@ -1,0 +1,14 @@
+﻿@model PhotoModel
+
+@if (!string.IsNullOrEmpty(Model?.Base64String))
+{
+    <h4>Base64 Encoded Image:</h4>
+    <p>
+        @{
+            var base64String = Model.Base64String;
+            var lines = Enumerable.Range(0, (int)Math.Ceiling((double)base64String.Length / 150))
+            .Select(i => base64String.Substring(i * 150, Math.Min(150, base64String.Length - i * 150)));
+            @Html.Raw(string.Join("<br>", lines))
+        }
+    </p>
+}
