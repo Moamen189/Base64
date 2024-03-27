@@ -32,7 +32,3 @@ This is a simple ASP.NET MVC application that allows users to upload a photo and
 - `Models/`: Contains the model classes.
 - `Views/`: Contains the view templates.
 - `wwwroot/`: Contains static files such as JavaScript, CSS, and images.
-
-## How to Contribute
-
-If you'd like to contribute to this project, feel free to fork the repository, make your changes, and submit a pull request.
